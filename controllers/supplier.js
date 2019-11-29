@@ -1,5 +1,5 @@
 const handleItemGet = (req, res, pool) => {
-  pool.query("SELECT * FROM supplier", (error, results) => {
+  pool.query("SELECT * FROM supplier ORDER BY id_supplier", (error, results) => {
     if (error) {
       throw error;
     }
@@ -27,24 +27,24 @@ const handleItemPut = (req, res, pool) => {
   const { id_supplier, nama_supplier, alamat, no_telp } = req.body;
 
   pool.query(
-    "UPDATE supplier SET id_supplier = $1, nama_supplier = $2, alamat = $3, no_telp=$4,  WHERE id_supplier = $1",
+    "UPDATE supplier SET nama_supplier = $2, alamat = $3, no_telp=$4  WHERE id_supplier = $1",
     [id_supplier, nama_supplier, alamat, no_telp],
     (error, results) => {
       if (error) {
         throw error;
       }
-      response.status(200).json(`User modified with ID: ${id_supplier}`);
+      res.status(200).json(`User modified with ID: ${id_supplier}`);
     }
   );
 };
 
 const handleItemDelete = (req, res, pool) => {
   const { id_supplier } = req.body;
-  pool.query("DELETE FROM data_barang WHERE id_supplier = $1", [id_supplier], (error, results) => {
+  pool.query("DELETE FROM supplier WHERE id_supplier = $1", [id_supplier], (error, results) => {
     if (error) {
       throw error;
     }
-    response.status(200).json(`User deleted with ID: ${id_supplier}`);
+    res.status(200).json(`User deleted with ID: ${id_supplier}`);
   });
 };
 

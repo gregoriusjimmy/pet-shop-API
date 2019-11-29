@@ -9,6 +9,7 @@ const port = 3001;
 
 const item = require("./controllers/item");
 const supplier = require("./controllers/supplier");
+const pembeli = require("./controllers/pembeli");
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -39,7 +40,7 @@ app.put("/item", (req, res) => {
 });
 
 app.delete("/item", (req, res) => {
-  item.handleItemPut(req, res, pool);
+  item.handleItemDelete(req, res, pool);
 });
 // END ITEM
 // SUPPLIER CONTROLLER
@@ -56,4 +57,18 @@ app.delete("/supplier", (req, res) => {
   supplier.handleItemDelete(req, res, pool);
 });
 // END SUPPLIER
+// PEMBELI CONTROLLER
+app.get("/pembeli", (req, res) => {
+  pembeli.handleItemGet(req, res, pool);
+});
+app.post("/pembeli", (req, res) => {
+  pembeli.handleItemPost(req, res, pool);
+});
+app.put("/pembeli", (req, res) => {
+  pembeli.handleItemPut(req, res, pool);
+});
+app.delete("/pembeli", (req, res) => {
+  pembeli.handleItemDelete(req, res, pool);
+});
+// END PEMBELI
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

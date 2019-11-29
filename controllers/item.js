@@ -1,5 +1,5 @@
 const handleItemGet = (req, res, pool) => {
-  pool.query("SELECT * FROM data_barang", (error, results) => {
+  pool.query("SELECT * FROM data_barang ORDER BY kd_barang", (error, results) => {
     if (error) {
       throw error;
     }
