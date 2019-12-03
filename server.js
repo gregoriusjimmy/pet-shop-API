@@ -1,74 +1,104 @@
-const express = require("express");
-const cors = require("cors");
-const bodyParser = require("body-parser");
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
 
-const { Pool, Client } = require("pg");
+const { Pool, Client } = require('pg');
 
 const app = express();
 const port = 3001;
 
-const item = require("./controllers/item");
-const supplier = require("./controllers/supplier");
-const pembeli = require("./controllers/pembeli");
+const item = require('./controllers/item');
+const supplier = require('./controllers/supplier');
+const pembeli = require('./controllers/pembeli');
+const pesanan = require('./controllers/pesanan');
+const transaksi = require('./controllers/transaksi');
 
 app.use(bodyParser.json());
 app.use(cors());
 
 const pool = new Pool({
-  user: "postgres",
-  host: "localhost",
-  database: "pet-shop",
-  password: "postgres305",
-  port: 5432
+  user: 'postgres',
+  host: 'localhost',
+  database: 'pet-shop',
+  password: 'postgres305',
+  port: 5432,
 });
 
-app.get("/", (req, res) => {
-  res.send("it is working");
+app.get('/', (req, res) => {
+  res.send('it is working');
 });
 
 // ITEM CONTROLLER
-app.get("/item", (req, res) => {
+app.get('/item', (req, res) => {
   item.handleItemGet(req, res, pool);
 });
 
-app.post("/item", (req, res) => {
+app.post('/item', (req, res) => {
   item.handleItemPost(req, res, pool);
 });
 
-app.put("/item", (req, res) => {
+app.put('/item', (req, res) => {
   item.handleItemPut(req, res, pool);
 });
 
-app.delete("/item", (req, res) => {
+app.delete('/item', (req, res) => {
   item.handleItemDelete(req, res, pool);
 });
 // END ITEM
 // SUPPLIER CONTROLLER
-app.get("/supplier", (req, res) => {
+app.get('/supplier', (req, res) => {
   supplier.handleItemGet(req, res, pool);
 });
-app.post("/supplier", (req, res) => {
+app.post('/supplier', (req, res) => {
   supplier.handleItemPost(req, res, pool);
 });
-app.put("/supplier", (req, res) => {
+app.put('/supplier', (req, res) => {
   supplier.handleItemPut(req, res, pool);
 });
-app.delete("/supplier", (req, res) => {
+app.delete('/supplier', (req, res) => {
   supplier.handleItemDelete(req, res, pool);
 });
 // END SUPPLIER
 // PEMBELI CONTROLLER
-app.get("/pembeli", (req, res) => {
+app.get('/pembeli', (req, res) => {
   pembeli.handleItemGet(req, res, pool);
 });
-app.post("/pembeli", (req, res) => {
+app.post('/pembeli', (req, res) => {
   pembeli.handleItemPost(req, res, pool);
 });
-app.put("/pembeli", (req, res) => {
+app.put('/pembeli', (req, res) => {
   pembeli.handleItemPut(req, res, pool);
 });
-app.delete("/pembeli", (req, res) => {
+app.delete('/pembeli', (req, res) => {
   pembeli.handleItemDelete(req, res, pool);
 });
 // END PEMBELI
+// PESANAN CONTROLLER
+app.get('/pesanan', (req, res) => {
+  pesanan.handleItemGet(req, res, pool);
+});
+app.post('/pesanan', (req, res) => {
+  pesanan.handleItemPost(req, res, pool);
+});
+app.put('/pesanan', (req, res) => {
+  pesanan.handleItemPut(req, res, pool);
+});
+app.delete('/pesanan', (req, res) => {
+  pesanan.handleItemDelete(req, res, pool);
+});
+// END PESANAN
+// TRANSAKSI CONTROLLER
+app.get('/transaksi', (req, res) => {
+  transaksi.handleItemGet(req, res, pool);
+});
+app.post('/transaksi', (req, res) => {
+  transaksi.handleItemPost(req, res, pool);
+});
+app.put('/transaksi', (req, res) => {
+  transaksi.handleItemPut(req, res, pool);
+});
+app.delete('/transaksi', (req, res) => {
+  transaksi.handleItemDelete(req, res, pool);
+});
+// END TRANSAKSI
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
