@@ -11,7 +11,7 @@ const handleItemPost = (req, res, pool) => {
 
   pool.query(
     'INSERT INTO transaksi VALUES ($1,$2,$3,$4,$5)',
-    [kd_transaksi, id_pembeli, kd_barang, jumlah, tgl_transaksi],
+    [kd_transaksi.toUpperCase(), id_pembeli.toUpperCase(), kd_barang.toUpperCase(), jumlah, tgl_transaksi],
     (error, results) => {
       if (error) {
         throw error;
@@ -27,7 +27,7 @@ const handleItemPut = (req, res, pool) => {
 
   pool.query(
     'UPDATE transaksi SET id_pembeli = $2, kd_barang = $3, jumlah=$4, tgl_transaksi=$5  WHERE kd_transaksi = $1',
-    [kd_transaksi, id_pembeli, kd_barang, jumlah, tgl_transaksi],
+    [kd_transaksi.toUpperCase(), id_pembeli.toUpperCase(), kd_barang.toUpperCase(), jumlah, tgl_transaksi],
     (error, results) => {
       if (error) {
         throw error;

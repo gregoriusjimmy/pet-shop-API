@@ -11,7 +11,7 @@ const handleItemPost = (req, res, pool) => {
 
   pool.query(
     'INSERT INTO supplier VALUES ($1,$2,$3,$4)',
-    [id_supplier, nama_supplier, alamat, no_telp],
+    [id_supplier.toUpperCase(), nama_supplier.toUpperCase(), alamat.toUpperCase(), no_telp],
     (error, results) => {
       if (error) {
         throw error;
@@ -27,7 +27,7 @@ const handleItemPut = (req, res, pool) => {
 
   pool.query(
     'UPDATE supplier SET nama_supplier = $2, alamat = $3, no_telp=$4  WHERE id_supplier = $1',
-    [id_supplier, nama_supplier, alamat, no_telp],
+    [id_supplier.toUpperCase(), nama_supplier.toUpperCase(), alamat.toUpperCase(), no_telp],
     (error, results) => {
       if (error) {
         throw error;

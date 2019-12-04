@@ -1,5 +1,5 @@
 const handleItemGet = (req, res, pool) => {
-  pool.query("SELECT * FROM data_barang ORDER BY kd_barang", (error, results) => {
+  pool.query('SELECT * FROM data_barang ORDER BY kd_barang', (error, results) => {
     if (error) {
       throw error;
     }
@@ -7,11 +7,11 @@ const handleItemGet = (req, res, pool) => {
   });
 };
 const handleItemPost = (req, res, pool) => {
-  const { kd_barang, nama_barang, satuan, harga, stok_barang } = req.body;
+  const { kd_barang, nama_barang, satuan, harga_jual, harga_beli, stok_barang } = req.body;
 
   pool.query(
-    "INSERT INTO data_barang VALUES ($1,$2,$3,$4,$5)",
-    [kd_barang, nama_barang, satuan, harga, stok_barang],
+    'INSERT INTO data_barang VALUES ($1,$2,$3,$4,$5,$6)',
+    [kd_barang.toUpperCase(), nama_barang.toUpperCase(), satuan, harga_jual, harga_beli, stok_barang],
     (error, results) => {
       if (error) {
         throw error;
@@ -23,16 +23,16 @@ const handleItemPost = (req, res, pool) => {
 };
 
 const handleItemPut = (req, res, pool) => {
-  const { kd_barang, nama_barang, satuan, harga, stok_barang } = req.body;
+  const { kd_barang, nama_barang, satuan, harga_jual, harga_beli, stok_barang } = req.body;
 
   pool.query(
-    "UPDATE data_barang SET nama_barang = $2, satuan = $3, harga= $4, stok_barang=$5 WHERE kd_barang = $1",
-    [kd_barang, nama_barang, satuan, harga, stok_barang],
+    'UPDATE data_barang SET nama_barang = $2, satuan = $3, harga_jual= $4,harga_beli = $5, stok_barang=$6 WHERE kd_barang = $1',
+    [kd_barang.toUpperCase(), nama_barang.toUpperCase(), satuan, harga_jual, harga_beli, stok_barang],
     (error, results) => {
       if (error) {
         throw error;
       } else {
-        res.status(200).json("User modified with ID:");
+        res.status(200).json('User modified with ID:');
       }
     }
   );
@@ -40,7 +40,7 @@ const handleItemPut = (req, res, pool) => {
 
 const handleItemDelete = (req, res, pool) => {
   const { kd_barang } = req.body;
-  pool.query("DELETE FROM data_barang WHERE kd_barang = $1", [kd_barang], (error, results) => {
+  pool.query('DELETE FROM data_barang WHERE kd_barang = $1', [kd_barang], (error, results) => {
     if (error) {
       throw error;
     }
@@ -52,5 +52,5 @@ module.exports = {
   handleItemGet: handleItemGet,
   handleItemPost: handleItemPost,
   handleItemPut: handleItemPut,
-  handleItemDelete: handleItemDelete
+  handleItemDelete: handleItemDelete,
 };
