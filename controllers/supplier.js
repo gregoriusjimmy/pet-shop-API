@@ -1,9 +1,10 @@
 const handleItemGet = (req, res, pool) => {
   pool.query('SELECT * FROM supplier ORDER BY id_supplier', (error, results) => {
     if (error) {
-      throw error;
+      res.status(400).json('unable to fetch');
+    } else {
+      res.status(200).json(results.rows);
     }
-    res.status(200).json(results.rows);
   });
 };
 const handleItemPost = (req, res, pool) => {
@@ -14,10 +15,10 @@ const handleItemPost = (req, res, pool) => {
     [id_supplier.toUpperCase(), nama_supplier.toUpperCase(), alamat.toUpperCase(), no_telp],
     (error, results) => {
       if (error) {
-        throw error;
+        res.status(400).json('unable to fetch');
+      } else {
+        res.status(200).json('success');
       }
-
-      res.status(200).json(`User added with ID: ${results}`);
     }
   );
 };
@@ -30,9 +31,10 @@ const handleItemPut = (req, res, pool) => {
     [id_supplier.toUpperCase(), nama_supplier.toUpperCase(), alamat.toUpperCase(), no_telp],
     (error, results) => {
       if (error) {
-        throw error;
+        res.status(400).json('unable to fetch');
+      } else {
+        res.status(200).json('success');
       }
-      res.status(200).json(`User modified with ID: ${id_supplier}`);
     }
   );
 };
@@ -41,9 +43,10 @@ const handleItemDelete = (req, res, pool) => {
   const { id_supplier } = req.body;
   pool.query('DELETE FROM supplier WHERE id_supplier = $1', [id_supplier], (error, results) => {
     if (error) {
-      throw error;
+      res.status(400).json('unable to fetch');
+    } else {
+      res.status(200).json('success');
     }
-    res.status(200).json(`User deleted with ID: ${id_supplier}`);
   });
 };
 

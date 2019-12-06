@@ -1,9 +1,10 @@
 const handleItemGet = (req, res, pool) => {
   pool.query('SELECT * FROM pesanan ORDER BY kd_order', (error, results) => {
     if (error) {
-      throw error;
+      res.status(400).json('unable to fetch');
+    } else {
+      res.status(200).json(results.rows);
     }
-    res.status(200).json(results.rows);
   });
 };
 const handleItemPost = (req, res, pool) => {
@@ -13,12 +14,11 @@ const handleItemPost = (req, res, pool) => {
     'INSERT INTO pesanan VALUES ($1,$2,$3,$4,$5)',
     [kd_order.toUpperCase(), tgl_order, id_supplier.toUpperCase(), kd_barang.toUpperCase(), jumlah],
     (error, results) => {
-      2;
       if (error) {
-        throw error;
+        res.status(400).json('unable to fetch');
+      } else {
+        res.status(200).json('success');
       }
-
-      res.status(200).json(`User added with ID: ${results}`);
     }
   );
 };
@@ -31,9 +31,10 @@ const handleItemPut = (req, res, pool) => {
     [kd_order.toUpperCase(), tgl_order, id_supplier.toUpperCase(), kd_barang.toUpperCase(), jumlah],
     (error, results) => {
       if (error) {
-        throw error;
+        res.status(400).json('unable to fetch');
+      } else {
+        res.status(200).json('success');
       }
-      res.status(200).json(`User modified with ID: ${kd_order}`);
     }
   );
 };
@@ -42,9 +43,10 @@ const handleItemDelete = (req, res, pool) => {
   const { kd_order } = req.body;
   pool.query('DELETE FROM pesanan WHERE kd_order = $1', [kd_order], (error, results) => {
     if (error) {
-      throw error;
+      res.status(400).json('unable to fetch');
+    } else {
+      res.status(200).json('success');
     }
-    res.status(200).json(`User deleted with ID: ${kd_order}`);
   });
 };
 
