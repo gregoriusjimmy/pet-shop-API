@@ -10,8 +10,8 @@ const port = 3001;
 const item = require('./controllers/item');
 const supplier = require('./controllers/supplier');
 const pembeli = require('./controllers/pembeli');
-const pesanan = require('./controllers/pesanan');
-const transaksi = require('./controllers/transaksi');
+const transaksi_beli = require('./controllers/transaksi_beli');
+const transaksi_jual = require('./controllers/transaksi_jual');
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -74,31 +74,31 @@ app.delete('/pembeli', (req, res) => {
 });
 // END PEMBELI
 // PESANAN CONTROLLER
-app.get('/pesanan', (req, res) => {
-  pesanan.handleItemGet(req, res, pool);
+app.get('/transaksi_beli', (req, res) => {
+  transaksi_beli.handleItemGet(req, res, pool);
 });
-app.post('/pesanan', (req, res) => {
-  pesanan.handleItemPost(req, res, pool);
+app.post('/transaksi_beli', (req, res) => {
+  transaksi_beli.handleItemPost(req, res, pool);
 });
-app.put('/pesanan', (req, res) => {
-  pesanan.handleItemPut(req, res, pool);
-});
-app.delete('/pesanan', (req, res) => {
-  pesanan.handleItemDelete(req, res, pool);
-});
+// app.put('/pesanan', (req, res) => {
+//   pesanan.handleItemPut(req, res, pool);
+// });
+// app.delete('/pesanan', (req, res) => {
+//   pesanan.handleItemDelete(req, res, pool);
+// });
 // END PESANAN
 // TRANSAKSI CONTROLLER
-app.get('/transaksi', (req, res) => {
-  transaksi.handleItemGet(req, res, pool);
+app.get('/transaksi_jual', (req, res) => {
+  transaksi_jual.handleItemGet(req, res, pool);
 });
-app.post('/transaksi', (req, res) => {
-  transaksi.handleItemPost(req, res, pool);
+app.post('/transaksi_jual', (req, res) => {
+  transaksi_jual.handleItemPost(req, res, pool);
 });
-app.put('/transaksi', (req, res) => {
-  transaksi.handleItemPut(req, res, pool);
-});
-app.delete('/transaksi', (req, res) => {
-  transaksi.handleItemDelete(req, res, pool);
-});
+// app.put('/transaksi_jual', (req, res) => {
+//   transaksi.handleItemPut(req, res, pool);
+// });
+// app.delete('/transaksi_jual', (req, res) => {
+//   transaksi.handleItemDelete(req, res, pool);
+// });
 // END TRANSAKSI
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
