@@ -11,7 +11,7 @@ const handleItemPost = (req, res, pool) => {
   const { id_pembeli, kd_barang, jumlah, harga_normal, potongan, harga_total } = req.body;
 
   pool.query(
-    'INSERT INTO transaksi_jual VALUES ($1,$2,$3,$4,$5)',
+    'INSERT INTO transaksi_jual (tgl_jual,id_pembeli, kd_barang, jumlah, harga_normal, potongan, harga_total)  VALUES ($1,$2,$3,$4,$5,$6,$7)',
     [new Date(), id_pembeli.toUpperCase(), kd_barang.toUpperCase(), jumlah, harga_normal, potongan, harga_total],
     (error, results) => {
       if (error) {
