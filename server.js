@@ -12,6 +12,7 @@ const supplier = require('./controllers/supplier');
 const pembeli = require('./controllers/pembeli');
 const transaksi_beli = require('./controllers/transaksi_beli');
 const transaksi_jual = require('./controllers/transaksi_jual');
+const jurnal = require('./controllers/jurnal');
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -101,4 +102,13 @@ app.post('/transaksi_jual', (req, res) => {
 //   transaksi.handleItemDelete(req, res, pool);
 // });
 // END TRANSAKSI
+// JURNAL CONTROLLER
+app.get('/jurnal', (req, res) => {
+  jurnal.handleItemGet(req, res, pool);
+});
+app.post('/jurnal', (req, res) => {
+  jurnal.handleItemPost(req, res, pool);
+});
+// END JURNAL
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
