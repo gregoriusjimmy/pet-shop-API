@@ -13,7 +13,9 @@ const pembeli = require('./controllers/pembeli');
 const transaksi_beli = require('./controllers/transaksi_beli');
 const transaksi_jual = require('./controllers/transaksi_jual');
 const jurnal = require('./controllers/jurnal');
+const perkiraan = require('./controllers/perkiraan');
 
+// perkiraan.test();
 app.use(bodyParser.json());
 app.use(cors());
 
@@ -110,5 +112,12 @@ app.post('/jurnal', (req, res) => {
   jurnal.handleItemPost(req, res, pool);
 });
 // END JURNAL
-
+// PERKIRAAN
+app.get('/perkiraan', (req, res) => {
+  perkiraan.handleItemGet(req, res, pool);
+});
+// app.post('/perkiraan', (req, res) => {
+//   perkiraan.handleItemPost(req, res, pool);
+// });
+// END PERKIRAAN
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
