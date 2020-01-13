@@ -116,8 +116,8 @@ app.post('/jurnal', (req, res) => {
 app.get('/perkiraan', (req, res) => {
   perkiraan.handleItemGet(req, res, pool);
 });
-// app.post('/perkiraan', (req, res) => {
-//   perkiraan.handleItemPost(req, res, pool);
-// });
+app.post('/perkiraan', (req, res) => {
+  perkiraan.handleItemPost(req, res, pool);
+});
 // END PERKIRAAN
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
