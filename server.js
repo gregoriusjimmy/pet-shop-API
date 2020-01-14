@@ -7,6 +7,10 @@ const { Pool, Client } = require('pg');
 const app = express();
 const port = 3001;
 
+const Datastore = require('nedb');
+const database = new Datastore('databse.db');
+database.loadDatabase();
+
 const item = require('./controllers/item');
 const supplier = require('./controllers/supplier');
 const pembeli = require('./controllers/pembeli');
@@ -14,6 +18,7 @@ const transaksi_beli = require('./controllers/transaksi_beli');
 const transaksi_jual = require('./controllers/transaksi_jual');
 const jurnal = require('./controllers/jurnal');
 const perkiraan = require('./controllers/perkiraan');
+const laporan = require('./controllers/laporan');
 
 // perkiraan.test();
 app.use(bodyParser.json());
@@ -120,4 +125,8 @@ app.post('/perkiraan', (req, res) => {
   perkiraan.handleItemPost(req, res, pool);
 });
 // END PERKIRAAN
+app.post('/createlaporan', (req, res) => {
+  laporan.handleCreateLaporan(req, res, database);
+});
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

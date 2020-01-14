@@ -64,7 +64,6 @@ const handleItemGet = (req, res, pool) => {
 
 module.exports = {
   handleItemGet: handleItemGet,
-
   handleItemPost: handleItemPost,
   // handleItemPut: handleItemPut,
   // handleItemDelete: handleItemDelete,
