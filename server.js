@@ -128,5 +128,8 @@ app.post('/perkiraan', (req, res) => {
 app.post('/createlaporan', (req, res) => {
   laporan.handleCreateLaporan(req, res, database);
 });
+app.get('/laporan', (req, res) => {
+  laporan.handleGetLaporan(req, res, database);
+});
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

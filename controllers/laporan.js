@@ -86,9 +86,17 @@ const handleCreateLaporan = (req, res, database) => {
       },
     },
   };
-  console.log(dataLaporan);
+  database.insert(dataLaporan);
+  res.status(200).json('create succes');
 };
-
+const handleGetLaporan = (req, res, database) => {
+  database.find({}, (err, data) => {
+    if (err) {
+      res.status(400).json('failed to fetch');
+    }
+    res.status(200).json(data);
+  });
+};
 const getSaldoFromPerkiraan = (dataSaldoAll, noAkun) => {
   const found = dataSaldoAll.find(element => element.no_akun == noAkun);
   if (found) {
@@ -104,4 +112,5 @@ const getSaldoFromPerkiraan = (dataSaldoAll, noAkun) => {
 
 module.exports = {
   handleCreateLaporan: handleCreateLaporan,
+  handleGetLaporan: handleGetLaporan,
 };

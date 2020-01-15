@@ -1,18 +1,36 @@
 const handleItemGet = (req, res, pool) => {
-  pool.query('SELECT * FROM transaksi_jual ORDER BY kd_jual', (error, results) => {
-    if (error) {
-      res.status(400).json('unable to fetch');
-    } else {
-      res.status(200).json(results.rows);
+  pool.query(
+    'SELECT * FROM transaksi_jual ORDER BY kd_jual',
+    (error, results) => {
+      if (error) {
+        res.status(400).json('unable to fetch');
+      } else {
+        res.status(200).json(results.rows);
+      }
     }
-  });
+  );
 };
 const handleItemPost = (req, res, pool) => {
-  const { id_pembeli, kd_barang, jumlah, harga_normal, potongan, harga_total } = req.body;
+  const {
+    id_pembeli,
+    kd_barang,
+    jumlah,
+    harga_normal,
+    potongan,
+    harga_total,
+  } = req.body;
 
   pool.query(
     'INSERT INTO transaksi_jual (tgl_jual,id_pembeli, kd_barang, jumlah, harga_normal, potongan, harga_total)  VALUES ($1,$2,$3,$4,$5,$6,$7)',
-    [new Date(), id_pembeli.toUpperCase(), kd_barang.toUpperCase(), jumlah, harga_normal, potongan, harga_total],
+    [
+      new Date(),
+      id_pembeli.toUpperCase(),
+      kd_barang.toUpperCase(),
+      jumlah,
+      harga_normal,
+      potongan,
+      harga_total,
+    ],
     (error, results) => {
       if (error) {
         res.status(400).json('unable to fetch');
