@@ -42,6 +42,7 @@ const handleCreateLaporan = (req, res, database) => {
   let aktivaTetap = peralatan - akumulasiPenyusutan;
   let aktivaLancar = kas + piutangDagang + perlengkapan + sewaDibayarDimuka;
   let totalAktiva = aktivaTetap + aktivaLancar;
+
   const dataLaporan = {
     idLaporan,
     namaLaporan,
